@@ -1,3 +1,4 @@
+package com.example.demo;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Singleton;
 import com.cloudinary.Transformation;

@@ -1,17 +1,5 @@
-//package com.example.demo;
-//
-//public class MainColtroller {
-//}
+package com.example.demo;
 import com.cloudinary.utils.ObjectUtils;
-import com.example.demo.Actor;
-import com.example.demo.ActorRepository;
-import com.example.demo.Movie;
-import com.example.demo.MovieRepository;
-import com.example.demo.cloudinary.CloudinaryConfig;
-import com.example.demo.models.Actor;
-import com.example.demo.models.Movie;
-import com.example.demo.repositories.ActorRepository;
-import com.example.demo.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,14 +59,14 @@ public class HomeController {
 
         try {
 
-            Map uploadResult = cloudc.upload(f.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+            Map uploadResult = cloudc.upload (f.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
             String uploadURL = (String) uploadResult.get("url");
             String uploadedName = (String) uploadResult.get("public_id");
-            String transformedImage = cloudc.createUrl(uploadedName);
+            String transformedImage = cloudc.createUrl (uploadedName);
             System.out.println(transformedImage);
             System.out.println("Uploaded:" + uploadURL);
             System.out.println("Name:" + uploadedName);
-            actor.setHeadshot(transformedImage);
+            actor.setHeadShot (transformedImage);
             actorRepository.save(actor);
 
         } catch (IOException e) {
@@ -121,7 +109,7 @@ public class HomeController {
     @RequestMapping("/search")
     public String SearchResult() {
         //Get actors matching a string
-        Iterable<Actor> actors = actorRepository.findAllByRealnameContainingIgnoreCase("Sandra");
+        Iterable<Actor> actors = actorRepository.findAllByrealNameContainingIgnoreCase("Sandra");
 
         for (Actor a : actors) {
             System.out.println(a.getName());
